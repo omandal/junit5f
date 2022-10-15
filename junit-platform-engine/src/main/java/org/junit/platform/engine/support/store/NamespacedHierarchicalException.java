@@ -8,15 +8,24 @@
  * https://www.eclipse.org/legal/epl-v20.html
  */
 
-package org.junit.jupiter.engine.execution;
+package org.junit.platform.engine.support.store;
 
+import static org.apiguardian.api.API.Status.EXPERIMENTAL;
+
+import org.apiguardian.api.API;
 import org.junit.platform.commons.JUnitException;
 
-public class ExtensionValuesStoreException extends JUnitException {
+/**
+ * Exception thrown by failed {@link NamespacedHierarchicalStore} operations.
+ *
+ * @since 5.10
+ */
+@API(status = EXPERIMENTAL, since = "5.10")
+public class NamespacedHierarchicalException extends JUnitException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ExtensionValuesStoreException(String message) {
+	NamespacedHierarchicalException(String message) {
 		super(message);
 	}
 
