@@ -71,7 +71,7 @@ class SeparateThreadTimeoutInvocationTest {
 
 	private static <T> SeparateThreadTimeoutInvocation<T> aSeparateThreadInvocation(Invocation<T> invocation) {
 		var namespace = ExtensionContext.Namespace.create(SeparateThreadTimeoutInvocationTest.class);
-		var store = new NamespaceAwareStore(new ExtensionValuesStore(null), namespace);
+		var store = new NamespaceAwareStore(new ExtensionValuesStore<>(null), namespace);
 		var parameters = new TimeoutInvocationParameters<>(invocation,
 			new TimeoutDuration(PREEMPTIVE_TIMEOUT_MILLIS, MILLISECONDS), () -> "method()");
 		return (SeparateThreadTimeoutInvocation<T>) new TimeoutInvocationFactory(store) //
