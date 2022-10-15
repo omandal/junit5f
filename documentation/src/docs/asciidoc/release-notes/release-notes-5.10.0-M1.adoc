@@ -23,7 +23,8 @@ GitHub.
 
 ==== New Features and Improvements
 
-* ❓
+* Extracted `NamespacedHierarchicalStore` from JUnit Jupiter engine for reuse by other
+  test engines and their extensions.
 
 
 [[release-notes-5.10.0-M1️-junit-jupiter]]
