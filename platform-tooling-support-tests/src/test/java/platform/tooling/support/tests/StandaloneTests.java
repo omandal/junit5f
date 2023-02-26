@@ -66,7 +66,7 @@ class StandaloneTests {
 				.setTool(new Java()) //
 				.setProject("standalone") //
 				.addArguments("-jar", MavenRepo.jar("junit-platform-console-standalone")) //
-				.addArguments("--list-engines", "--disable-banner").build() //
+				.addArguments("engines", "--disable-banner").build() //
 				.run(false);
 
 		assertEquals(0, result.getExitCode(), String.join("\n", result.getOutputLines("out")));
@@ -116,7 +116,7 @@ class StandaloneTests {
 	@Test
 	@Order(2)
 	void discoverTree() {
-		Result result = listTests("--details-theme=ascii");
+		Result result = discover("--details-theme=ascii");
 
 		var expected = """
 				.
@@ -151,7 +151,7 @@ class StandaloneTests {
 	@Test
 	@Order(2)
 	void discoverFlat() {
-		Result result = listTests("--details=flat");
+		Result result = discover("--details=flat");
 
 		var expected = """
 				JUnit Jupiter ([engine:junit-jupiter])
@@ -185,7 +185,7 @@ class StandaloneTests {
 	@Test
 	@Order(2)
 	void discoverVerbose() {
-		Result result = listTests("--details=verbose", "--details-theme=ascii");
+		Result result = discover("--details=verbose", "--details-theme=ascii");
 
 		var expected = """
 				+-- JUnit Jupiter
@@ -269,7 +269,7 @@ class StandaloneTests {
 	@Test
 	@Order(2)
 	void discoverNone() {
-		Result result = listTests("--details=none");
+		Result result = discover("--details=none");
 
 		assertThat(result.getOutputLines("out")).isEmpty();
 	}
@@ -277,7 +277,7 @@ class StandaloneTests {
 	@Test
 	@Order(2)
 	void discoverSummary() {
-		Result result = listTests("--details=summary");
+		Result result = discover("--details=summary");
 
 		var expected = """
 
@@ -288,12 +288,12 @@ class StandaloneTests {
 		assertLinesMatch(expected.lines(), result.getOutputLines("out").stream());
 	}
 
-	private static Result listTests(String... args) {
+	private static Result discover(String... args) {
 		var result = Request.builder() //
 				.setTool(new Java()) //
 				.setProject("standalone") //
 				.addArguments("-jar", MavenRepo.jar("junit-platform-console-standalone")) //
-				.addArguments("--list-tests") //
+				.addArguments("discover") //
 				.addArguments("--scan-class-path") //
 				.addArguments("--disable-banner") //
 				.addArguments("--disable-ansi-colors") //
@@ -318,6 +318,7 @@ class StandaloneTests {
 				.addArguments("-Djava.util.logging.config.file=logging.properties") //
 				.addArguments("-Djunit.platform.launcher.interceptors.enabled=true") //
 				.addArguments("-jar", MavenRepo.jar("junit-platform-console-standalone")) //
+				.addArguments("execute") //
 				.addArguments("--scan-class-path") //
 				.addArguments("--disable-banner") //
 				.addArguments("--include-classname", "standalone.*") //
@@ -352,6 +353,7 @@ class StandaloneTests {
 				.addArguments("-Djava.util.logging.config.file=logging.properties") //
 				.addArguments("-Djunit.platform.launcher.interceptors.enabled=true") //
 				.addArguments("-jar", MavenRepo.jar("junit-platform-console-standalone")) //
+				.addArguments("execute") //
 				.addArguments("--scan-class-path") //
 				.addArguments("--disable-banner") //
 				.addArguments("--include-classname", "standalone.*") //
@@ -387,6 +389,7 @@ class StandaloneTests {
 				.addArguments("-Djava.util.logging.config.file=logging.properties") //
 				.addArguments("-Djunit.platform.launcher.interceptors.enabled=true") //
 				.addArguments("-jar", MavenRepo.jar("junit-platform-console-standalone")) //
+				.addArguments("execute") //
 				.addArguments("--select-package", "standalone") //
 				.addArguments("--disable-banner") //
 				.addArguments("--include-classname", "standalone.*") //
@@ -426,6 +429,7 @@ class StandaloneTests {
 				.addArguments("-Djava.util.logging.config.file=logging.properties") //
 				.addArguments("--class-path", String.join(File.pathSeparator, path)) //
 				.addArguments("org.junit.platform.console.ConsoleLauncher") //
+				.addArguments("execute") //
 				.addArguments("--scan-class-path") //
 				.addArguments("--disable-banner") //
 				.addArguments("--include-classname", "standalone.*") //
