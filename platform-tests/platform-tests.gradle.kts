@@ -32,6 +32,7 @@ dependencies {
 	}
 	testImplementation(libs.joox)
 	testImplementation(libs.openTestReporting.tooling)
+	testImplementation(libs.picocli)
 	testImplementation(libs.bundles.xmlunit)
 
 	// --- Test run-time dependencies ---------------------------------------------
