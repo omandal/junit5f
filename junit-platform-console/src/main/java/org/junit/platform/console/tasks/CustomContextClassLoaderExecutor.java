@@ -52,7 +52,7 @@ class CustomContextClassLoaderExecutor {
 			customClassLoader.close();
 		}
 		catch (Exception e) {
-			throw new RuntimeException("Failed to close custom class loader", e);
+			throw new JUnitException("Failed to close custom class loader", e);
 		}
 	}
 
