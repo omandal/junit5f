@@ -13,6 +13,8 @@ package org.junit.platform.console.tasks;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.junit.platform.commons.JUnitException;
+
 /**
  * @since 1.0
  */
